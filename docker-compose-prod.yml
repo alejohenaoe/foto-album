@@ -1,0 +1,55 @@
+services:
+  foto_album_frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production-stage
+    image: foto_album_frontend
+    container_name: foto_album_frontend
+    restart: unless-stopped
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/nginx.conf
+      - ./media/:/media/
+      - ./public/:/public/
+    depends_on:
+      - foto_album_backend
+    ports:
+      - "127.0.0.1:8007:80"
+
+  foto_album_backend:
+    build:
+      dockerfile: Dockerfile
+      context: backend/
+      args:
+        requirements: requirements/produccion.txt
+    image: foto_album_backend
+    container_name: foto_album_backend
+    restart: unless-stopped
+
+    # Inyectar variables desde .env dentro del contenedor
+    env_file:
+      - .env
+
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.produccion
+      - GIT_COMMIT_SHA=${GIT_COMMIT_SHA:-local-build}
+      - PORT=8000 # se usa en el Dockerfile/start.sh para arrancar gunicorn
+      - PGTZ=UTC
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    # Persistencia de media/public compartida con frontend (nginx)
+    volumes:
+      - ./media/:/media/
+      - ./public/:/public/
+      - .env:/app/.env
+
+    ports:
+      - "127.0.0.1:8000:8000"
+
+    # healthcheck:
+    #   test: [ "CMD-SHELL", "curl -fsS http://localhost:8000/admin/login/ -o /dev/null || exit 1" ]
+    #   interval: 15s
+    #   timeout: 3s
+    #   retries: 5
