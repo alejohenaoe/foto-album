@@ -28,7 +28,7 @@ services:
       foto_album_db:
         condition: service_healthy
     environment:
-      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DJANGO_SETTINGS_MODULE: config.settings.develop
       DB_NAME: foto_album
       DB_USER: foto_album
       DB_PASSWORD: foto_album_dev

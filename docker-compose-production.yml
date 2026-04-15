@@ -31,7 +31,7 @@ services:
       - .env
 
     environment:
-      - DJANGO_SETTINGS_MODULE=config.settings.produccion
+      - DJANGO_SETTINGS_MODULE=config.settings.production
       - GIT_COMMIT_SHA=${GIT_COMMIT_SHA:-local-build}
       - PORT=8000 # se usa en el Dockerfile/start.sh para arrancar gunicorn
       - PGTZ=UTC
