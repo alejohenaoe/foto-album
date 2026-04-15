@@ -14,7 +14,7 @@ services:
     depends_on:
       - foto_album_backend
     ports:
-      - "127.0.0.1:8007:80"
+      - "0.0.0.0:8007:80"
 
   foto_album_backend:
     build:
@@ -46,7 +46,7 @@ services:
       - .env:/app/.env
 
     ports:
-      - "127.0.0.1:8000:8000"
+      - "0.0.0.0:8000:8000"
 
     # healthcheck:
     #   test: [ "CMD-SHELL", "curl -fsS http://localhost:8000/admin/login/ -o /dev/null || exit 1" ]
