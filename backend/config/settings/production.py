@@ -3,7 +3,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Static files (CSS, JavaScript, Images)
@@ -15,12 +15,12 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Security settings for production
-SECURE_SSL_REDIRECT = False  # Set to True if using HTTPS
-SESSION_COOKIE_SECURE = False  # Set to True if using HTTPS
-CSRF_COOKIE_SECURE = False  # Set to True if using HTTPS
+# SECURE_SSL_REDIRECT = False  # Set to True if using HTTPS
+# SESSION_COOKIE_SECURE = False  # Set to True if using HTTPS
+# CSRF_COOKIE_SECURE = False  # Set to True if using HTTPS
 
 # CORS configuration for Cloudflare tunnel deployment
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 # Accept all *.trycloudflare.com subdomains (tunnel URLs can vary)
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https?://.*\.trycloudflare\.com$",  # CloudFlare tunnel domains
