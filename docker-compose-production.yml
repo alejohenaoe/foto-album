@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
       context: backend/
       args:
-        requirements: requirements/produccion.txt
+        requirements: requirements/production.txt
     image: foto_album_backend
     container_name: foto_album_backend
     restart: unless-stopped
