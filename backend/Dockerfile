@@ -7,7 +7,7 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y gcc libpq-dev
 
-ARG REQUIREMENTS_FILE=prod.txt
+ARG REQUIREMENTS_FILE=production.txt
 COPY requirements/ requirements/
 RUN pip install --no-cache-dir -r requirements/${REQUIREMENTS_FILE}
 

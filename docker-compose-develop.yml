@@ -21,7 +21,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
       args:
-        REQUIREMENTS_FILE: dev.txt
+        REQUIREMENTS_FILE: develop.txt
     image: foto_album_backend:dev
     container_name: foto_album_backend_dev
     depends_on:
