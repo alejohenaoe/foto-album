@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <div className='fixed inset-0 -z-10 w-full h-full blur-xs'>
+      <div className='fixed inset-0 -z-10 w-full h-full'>
         <video 
           src="/video_2.mp4" 
           autoPlay

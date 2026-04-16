@@ -25,7 +25,7 @@ export default function HeroPage() {
             </div>
             <form 
                 onSubmit={handleSubmit} 
-                className="w-full max-w-md backdrop-blur-md bg-white bg-opacity-10 border border-white border-opacity-20 p-10 space-y-6 shadow-2xl hover:bg-opacity-15 transition-all duration-300">
+                className="w-full max-w-md backdrop-blur-md bg-white/10 border border-white/20 p-10 space-y-6 shadow-2xl hover:bg-white/15 transition-all duration-300">
                 <div>
                     <p className="text-lg font-bold text-center mb-2">Accede a tu galería</p>
                 </div>
@@ -34,7 +34,7 @@ export default function HeroPage() {
                     value={value}
                     onChange={(codigo) => setValue(codigo.target.value)}
                     placeholder="Código de acceso"
-                    className="w-full bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:bg-opacity-20 transition-all"
+                    className="w-full bg-white/10 border border-white/30 rounded-lg px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:bg-white/20 transition-all"
                 />
                 <button 
                     type="submit"

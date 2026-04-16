@@ -1,6 +1,6 @@
 function NavBar() {
     return (
-        <nav className='w-full bg-zinc-900 bg-opacity-50 h-16 text-white flex items-center justify-between px-8 sticky top-0 z-50 border-b border-zinc-700'>
+        <nav className='w-full bg-zinc-900/50 h-16 text-white flex items-center justify-between px-8 sticky top-0 z-50 border-b border-zinc-700 backdrop-blur-md'>
             <div className='text-2xl font-light tracking-widest'>neftik photo</div>
             <div className='flex space-x-10'>
                 <a href="#" className='font-light text-sm hover:text-cyan-300 transition-colors duration-200'>INICIO</a>

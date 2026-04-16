@@ -1,3 +1,2 @@
 # Development dependencies
 -r base.txt
-psycopg[binary]=3.2
