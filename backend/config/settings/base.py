@@ -5,10 +5,10 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-qoec*+3(604*(v!l1&yz@6xj(ay^6(xw1$2j(k^97-x74@$(9r"
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-qoec*+3(604*(v!l1&yz@6xj(ay^6(xw1$2j(k^97-x74@$(9r")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "yes")
 
 ALLOWED_HOSTS = []
 CORS_ALLOW_ALL_ORIGINS = True
@@ -25,6 +25,7 @@ INSTALLED_APPS = [
 
     "rest_framework",
     "corsheaders",
+    "apps.users"
 ]
 
 MIDDLEWARE = [
@@ -64,11 +65,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
+        "NAME": os.getenv("DB_NAME", "foto_album"),
+        "USER": os.getenv("DB_USER", "foto_album"),
+        "PASSWORD": os.getenv("DB_PASSWORD", "foto_album_dev"),
+        "HOST": os.getenv("DB_HOST", "localhost"),
+        "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
 
