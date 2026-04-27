@@ -2,10 +2,8 @@ services:
   foto_album_db:
     image: postgres:17-alpine
     container_name: foto_album_db_dev
-    environment:
-      POSTGRES_USER: foto_album
-      POSTGRES_PASSWORD: foto_album_dev
-      POSTGRES_DB: foto_album
+    env_file:
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -27,13 +25,10 @@ services:
     depends_on:
       foto_album_db:
         condition: service_healthy
+    env_file:
+      - .env
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.develop
-      DB_NAME: foto_album
-      DB_USER: foto_album
-      DB_PASSWORD: foto_album_dev
-      DB_HOST: foto_album_db
-      DB_PORT: "5432"
       PGTZ: UTC
     volumes:
       - ./backend:/app

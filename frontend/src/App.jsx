@@ -6,19 +6,12 @@ function App() {
 
   return (
     <>
-      <div className='fixed inset-0 -z-10 w-full h-full'>
-        <video 
-          src="/video_background.mp4" 
-          autoPlay
-          loop
-          muted
-          className='w-full h-full object-cover blur-[2px]'
-         />
+      <div id='video-background' className='fixed inset-0 -z-10 w-full h-full'>
+        <video src="/videos/video_background.mp4" autoPlay loop muted className='w-full h-full object-cover blur-[2px]'/>
       </div>
       <NavBar />
       <HeroPage />
       <WhatsAppButton />
-
     </>
   )
 }
