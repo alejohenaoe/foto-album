@@ -1,5 +1,6 @@
 # Runtime dependencies shared by all environments
 Django==5.2.5
 djangorestframework==3.16.0
+djangorestframework-simplejwt==5.3
 django-cors-headers==4.5.0
 psycopg2-binary==2.9.10

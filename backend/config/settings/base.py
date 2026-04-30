@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +25,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "rest_framework",
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
     "apps.users"
 ]
@@ -71,6 +74,45 @@ DATABASES = {
         "HOST": os.getenv("DB_HOST", "localhost"),
         "PORT": os.getenv("DB_PORT", "5432"),
     }
+}
+
+# --- DRF: usar JWT como método de autenticación por defecto ---
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        # Todas las rutas requieren autenticación por defecto.
+        # Se puede sobreescribir por vista con AllowAny
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+# --- Configuración de Simple JWT ---
+SIMPLE_JWT = {
+    # Cuánto tiempo vive el access token
+    # Corto a propósito: si lo roban, expira rápido
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+
+    # Cuánto tiempo vive el refresh token
+    # Más largo: el usuario no tiene que hacer login cada 30 min
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+
+    # Al usar el refresh token para renovar, se genera uno nuevo
+    # y el anterior queda inválido (más seguro)
+    'ROTATE_REFRESH_TOKENS': True,
+
+    # El refresh token anterior se agrega a la blacklist
+    # (requiere 'rest_framework_simplejwt.token_blacklist' en INSTALLED_APPS)
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    # Prefijo que el cliente debe enviar en el header
+    # Authorization: Bearer <token>
+    'AUTH_HEADER_TYPES': ('Bearer',),
+
+    # Qué campo del usuario se incluye en el token
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
 }
 
 
