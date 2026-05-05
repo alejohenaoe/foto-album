@@ -34,20 +34,18 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-slate-800 rounded-2xl shadow-xl border border-slate-700 p-8">
-        {/* Logo y título */}
+    <div className="min-h-screen bg-zinc-900 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(24,24,27,0.4)_60%,rgba(24,24,27,0.8)_100%)] pointer-events-none" />
+
+      <div className="w-full max-w-md backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl hover:border-white/20 transition-all duration-500 animate-fade-in-up relative z-10">
+        {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          {/* Shield icon SVG */}
-          <svg
-            className="w-12 h-12 text-indigo-500 mb-4"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
-          </svg>
-          <h1 className="text-2xl font-bold text-white text-center">
-            Panel Administrativo
+          <p className="text-lg md:text-xl font-light tracking-[8px] text-cyan-300/90 mb-2">
+            NEFTIK PHOTO
+          </p>
+          <h1 className="text-xl font-light tracking-wide text-white text-center">
+            Acceso Administrativo
           </h1>
         </div>
 
@@ -57,7 +55,7 @@ export default function Login() {
           <div>
             <label
               htmlFor="username"
-              className="block text-sm font-medium text-slate-300 mb-2"
+              className="block text-sm font-light text-gray-300 mb-2"
             >
               Usuario
             </label>
@@ -68,7 +66,7 @@ export default function Login() {
               onChange={(e) => setUsername(e.target.value)}
               disabled={loading}
               placeholder="Ingresa tu usuario"
-              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3.5 text-white placeholder-gray-400 focus:outline-none focus:border-cyan-300/50 focus:bg-white/[0.08] focus:shadow-[0_0_20px_rgba(6,182,212,0.15)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
             />
           </div>
 
@@ -76,7 +74,7 @@ export default function Login() {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-slate-300 mb-2"
+              className="block text-sm font-light text-gray-300 mb-2"
             >
               Contraseña
             </label>
@@ -88,31 +86,36 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={loading}
                 placeholder="Ingresa tu contraseña"
-                className="w-full px-4 py-2 pr-10 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition"
+                className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3.5 pr-10 text-white placeholder-gray-400 focus:outline-none focus:border-cyan-300/50 focus:bg-white/[0.08] focus:shadow-[0_0_20px_rgba(6,182,212,0.15)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 disabled={loading}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {showPassword ? (
                   /* Eye-off icon */
                   <svg
                     className="w-5 h-5"
-                    fill="currentColor"
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
+                    strokeWidth="2"
                   >
-                    <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
                   </svg>
                 ) : (
                   /* Eye icon */
                   <svg
                     className="w-5 h-5"
-                    fill="currentColor"
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
+                    strokeWidth="2"
                   >
-                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 )}
               </button>
@@ -121,7 +124,7 @@ export default function Login() {
 
           {/* Mensaje de error */}
           {error && (
-            <div className="p-3 bg-red-900/50 border border-red-700 rounded-lg">
+            <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl">
               <p className="text-red-400 text-sm">{error}</p>
             </div>
           )}
@@ -130,11 +133,10 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full bg-cyan-300 hover:bg-cyan-200 text-gray-900 font-medium py-3.5 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-cyan-300/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 relative overflow-hidden group"
           >
-            {loading ? (
+            <span className="relative z-10">{loading ? (
               <>
-                {/* Spinner SVG */}
                 <svg
                   className="w-4 h-4 animate-spin"
                   fill="none"
@@ -158,9 +160,17 @@ export default function Login() {
               </>
             ) : (
               'Iniciar sesión'
-            )}
+            )}</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
           </button>
         </form>
+      </div>
+
+      {/* Decorative elements */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-1.5 opacity-50">
+        <div className="w-1 h-1 rounded-full bg-cyan-300 animate-pulse" />
+        <div className="w-1 h-1 rounded-full bg-cyan-300 animate-pulse animation-delay-200" />
+        <div className="w-1 h-1 rounded-full bg-cyan-300 animate-pulse animation-delay-400" />
       </div>
     </div>
   );

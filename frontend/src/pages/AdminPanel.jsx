@@ -7,7 +7,6 @@ export default function AdminPanel() {
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
 
-  // Verificar token y decodificar username
   useEffect(() => {
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
@@ -15,13 +14,11 @@ export default function AdminPanel() {
       return;
     }
 
-    // Decodificar JWT (formato: header.payload.signature)
     try {
       const parts = accessToken.split('.');
       if (parts.length !== 3) throw new Error('Token inválido');
 
       const payload = JSON.parse(atob(parts[1]));
-      // Buscar el campo de username (podría ser username, preferred_username, o sub)
       const user = payload.username || payload.preferred_username || payload.sub || 'Usuario';
       setUsername(user);
     } catch (err) {
@@ -41,207 +38,157 @@ export default function AdminPanel() {
   };
 
   return (
-    <div className="flex h-screen bg-slate-900">
-      {/* Sidebar */}
-      <aside className="w-64 bg-slate-800 border-r border-slate-700 flex flex-col">
-        {/* Logo y título */}
-        <div className="p-6 border-b border-slate-700">
-          <div className="flex items-center gap-3">
-            {/* Shield icon */}
-            <svg
-              className="w-8 h-8 text-indigo-500"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
-            </svg>
-            <h1 className="text-xl font-bold text-white">Panel Admin</h1>
-          </div>
+    <div className="flex h-screen bg-zinc-900">
+      <aside className="w-64 bg-zinc-900/90 backdrop-blur-md border-r border-zinc-700 flex flex-col">
+        <div className="p-6 border-b border-zinc-700">
+          <p className="text-lg font-light tracking-[6px] text-cyan-300/90">NEFTIK</p>
         </div>
 
-        {/* Navigation links */}
         <nav className="flex-1 p-4 space-y-2">
-          {/* Dashboard */}
           <button
             onClick={() => setActiveSection('dashboard')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
               activeSection === 'dashboard'
-                ? 'bg-slate-700 text-indigo-500 border-l-4 border-indigo-500'
-                : 'text-slate-300 hover:bg-slate-700'
+                ? 'bg-white/5 text-cyan-300 border-l-4 border-cyan-300'
+                : 'text-gray-300 hover:bg-white/5'
             }`}
           >
-            {/* Home icon */}
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1" />
             </svg>
             <span className="font-medium">Dashboard</span>
           </button>
 
-          {/* Clientes */}
           <button
             onClick={() => setActiveSection('clientes')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
               activeSection === 'clientes'
-                ? 'bg-slate-700 text-indigo-500 border-l-4 border-indigo-500'
-                : 'text-slate-300 hover:bg-slate-700'
+                ? 'bg-white/5 text-cyan-300 border-l-4 border-cyan-300'
+                : 'text-gray-300 hover:bg-white/5'
             }`}
           >
-            {/* Users icon */}
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
             <span className="font-medium">Clientes</span>
           </button>
 
-          {/* Agregar Cliente */}
           <button
             onClick={() => setActiveSection('agregar-cliente')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
               activeSection === 'agregar-cliente'
-                ? 'bg-slate-700 text-indigo-500 border-l-4 border-indigo-500'
-                : 'text-slate-300 hover:bg-slate-700'
+                ? 'bg-white/5 text-cyan-300 border-l-4 border-cyan-300'
+                : 'text-gray-300 hover:bg-white/5'
             }`}
           >
-            {/* User-plus icon */}
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 4c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm9 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5zm7-5v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2z" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
             </svg>
             <span className="font-medium">Agregar Cliente</span>
           </button>
 
-          {/* Cotizaciones */}
           <button
             onClick={() => setActiveSection('cotizaciones')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
               activeSection === 'cotizaciones'
-                ? 'bg-slate-700 text-indigo-500 border-l-4 border-indigo-500'
-                : 'text-slate-300 hover:bg-slate-700'
+                ? 'bg-white/5 text-cyan-300 border-l-4 border-cyan-300'
+                : 'text-gray-300 hover:bg-white/5'
             }`}
           >
-            {/* Document icon */}
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-8-6z" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             <span className="font-medium">Cotizaciones</span>
           </button>
         </nav>
 
-        {/* Logout button */}
-        <div className="p-4 border-t border-slate-700">
+        <div className="p-4 border-t border-zinc-700">
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 hover:text-white rounded-lg transition font-medium"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white rounded-lg transition-all duration-200 font-medium"
           >
-            {/* Logout icon */}
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
             <span>Cerrar sesión</span>
           </button>
         </div>
       </aside>
 
-      {/* Main content */}
       <main className="flex-1 flex flex-col overflow-hidden">
-        {/* Top bar */}
-        <div className="bg-slate-800 border-b border-slate-700 px-8 py-4">
-          <p className="text-slate-300">
+        <div className="bg-zinc-900/90 backdrop-blur border-b border-zinc-700 px-8 py-4">
+          <p className="text-gray-300">
             Bienvenido, <span className="font-semibold text-white">{username}</span>
           </p>
         </div>
 
-        {/* Content area */}
-        <div className="flex-1 overflow-auto p-8">
-          {/* Dashboard Section */}
+        <div className="flex-1 overflow-auto p-8 animate-fade-in-up">
           {activeSection === 'dashboard' && (
             <div className="space-y-8">
-              {/* Stat cards grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Total Clientes */}
-                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-all duration-300">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-slate-400 text-sm">Total Clientes</p>
+                      <p className="text-gray-400 text-sm">Total Clientes</p>
                       <p className="text-3xl font-bold text-white mt-2">0</p>
                     </div>
-                    {/* Users icon */}
-                    <svg
-                      className="w-10 h-10 text-indigo-500 opacity-20"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="w-10 h-10 text-cyan-300 opacity-20" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
                     </svg>
                   </div>
                 </div>
 
-                {/* Cotizaciones Enviadas */}
-                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-all duration-300">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-slate-400 text-sm">Cotizaciones Enviadas</p>
+                      <p className="text-gray-400 text-sm">Cotizaciones Enviadas</p>
                       <p className="text-3xl font-bold text-white mt-2">0</p>
                     </div>
-                    {/* Document icon */}
-                    <svg
-                      className="w-10 h-10 text-indigo-500 opacity-20"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-8-6z" />
+                    <svg className="w-10 h-10 text-cyan-300 opacity-20" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-8-6z" />
                     </svg>
                   </div>
                 </div>
 
-                {/* Pendientes */}
-                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-all duration-300">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-slate-400 text-sm">Pendientes</p>
+                      <p className="text-gray-400 text-sm">Pendientes</p>
                       <p className="text-3xl font-bold text-white mt-2">0</p>
                     </div>
-                    {/* Clock icon */}
-                    <svg
-                      className="w-10 h-10 text-indigo-500 opacity-20"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="w-10 h-10 text-cyan-300 opacity-20" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M11.99 5C6.47 5 2 9.48 2 15s4.47 10 9.99 10C17.52 25 22 20.52 22 15S17.52 5 11.99 5zM15.5 15.5h-4v-4h1.5v2.5h2.5v1.5z" />
                     </svg>
                   </div>
                 </div>
               </div>
 
-              {/* Placeholder message */}
-              <div className="bg-slate-800 rounded-xl p-8 border border-slate-700 text-center">
-                <p className="text-slate-400 text-lg">
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:border-white/20 transition-all duration-300">
+                <p className="text-gray-400 text-lg">
                   Selecciona una sección para comenzar
                 </p>
               </div>
             </div>
           )}
 
-          {/* Clientes Section */}
           {activeSection === 'clientes' && (
-            <div className="bg-slate-800 rounded-xl p-8 border border-slate-700 text-center">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:border-white/20 transition-all duration-300">
               <h2 className="text-2xl font-bold text-white mb-2">Clientes</h2>
-              <p className="text-slate-400 text-lg">Próximamente</p>
+              <p className="text-gray-400 text-lg">Próximamente</p>
             </div>
           )}
 
-          {/* Agregar Cliente Section */}
           {activeSection === 'agregar-cliente' && (
-            <div className="bg-slate-800 rounded-xl p-8 border border-slate-700 text-center">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:border-white/20 transition-all duration-300">
               <h2 className="text-2xl font-bold text-white mb-2">Agregar Cliente</h2>
-              <p className="text-slate-400 text-lg">Próximamente</p>
+              <p className="text-gray-400 text-lg">Próximamente</p>
             </div>
           )}
 
-          {/* Cotizaciones Section */}
           {activeSection === 'cotizaciones' && (
-            <div className="bg-slate-800 rounded-xl p-8 border border-slate-700 text-center">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8 text-center hover:border-white/20 transition-all duration-300">
               <h2 className="text-2xl font-bold text-white mb-2">Cotizaciones</h2>
-              <p className="text-slate-400 text-lg">Próximamente</p>
+              <p className="text-gray-400 text-lg">Próximamente</p>
             </div>
           )}
         </div>
