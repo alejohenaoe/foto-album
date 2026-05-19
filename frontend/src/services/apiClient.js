@@ -29,7 +29,22 @@ export async function apiRequest(endpoint, options = {}) {
         }
     }
 
-    if (!response.ok) throw new Error(`Error ${response.status}`);
+    if (!response.ok) {
+      let errorMessage = `Error ${response.status}`;
+      try {
+        const errorBody = await response.json();
+        if (errorBody.detail) errorMessage = errorBody.detail;
+        else if (typeof errorBody === 'object') {
+          const firstKey = Object.keys(errorBody)[0];
+          if (firstKey && Array.isArray(errorBody[firstKey])) {
+            errorMessage = errorBody[firstKey][0];
+          }
+        }
+      } catch {
+        // ignore parse errors
+      }
+      throw new Error(errorMessage);
+    }
     return response.json();
 }
 

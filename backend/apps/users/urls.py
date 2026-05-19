@@ -4,15 +4,28 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from apps.users.views import PerfilView
+from apps.users.views import (
+    AppUserDeactivateView,
+    AppUserListCreateView,
+    AppUserRegenerateView,
+    PerfilView,
+)
 
 
 urlpatterns = [
-    # Login endpoint JWT Authentication with Simple JWT ()
     path('auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('auth/logout/', TokenObtainPairView.as_view(), name='token_blacklist'),  # Endpoint para logout (blacklist)
-
-    # Rutas protegidas
+    path('auth/logout/', TokenObtainPairView.as_view(), name='token_blacklist'),
     path('profile/', PerfilView.as_view(), name='user_profile'),
+    path('app-users/', AppUserListCreateView.as_view(), name='app-user-list-create'),
+    path(
+        'app-users/<int:pk>/deactivate/',
+        AppUserDeactivateView.as_view(),
+        name='app-user-deactivate',
+    ),
+    path(
+        'app-users/<int:pk>/regenerate/',
+        AppUserRegenerateView.as_view(),
+        name='app-user-regenerate',
+    ),
 ]
